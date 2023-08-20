@@ -1,7 +1,9 @@
 syntax = "proto3";
 
 service NoteService {
-  rpc List (Empty) returns (Notes) {}
+  rpc ListAllNotes (Empty) returns (NotesList) {};
+  rpc AddNote (NewNote) returns (Note) {};
+  rpc EditNote (NoteEdit) returns (Note) {};
 }
 
 message Empty {}
@@ -12,6 +14,17 @@ message Note {
   string content = 3;
 }
 
-message Notes {
+message NewNote {
+  string title = 1;
+  string content = 2;
+}
+
+message NoteEdit {
+  string id = 1;
+  optional string title = 2;
+  optional string content = 3;
+}
+
+message NotesList {
   repeated Note notes = 1;
 }
