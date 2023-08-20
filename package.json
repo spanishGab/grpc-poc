@@ -1,0 +1,14 @@
+{
+  "name": "grpc-poc",
+  "version": "1.0.0",
+  "description": "POC for a better understanding of the gRPC framework.",
+  "main": "index.js",
+  "author": "spanishGab <gabrielmail09@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.9.0",
+    "@grpc/proto-loader": "^0.7.8"
+  }
+}

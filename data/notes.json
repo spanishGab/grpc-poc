@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1",
+    "title": "Call Daniel",
+    "content": "I need to talk to Daniel about the gRPC protocol"
+  },
+  {
+    "id": "2",
+    "title": "Design gRPC software architecture",
+    "content": "I have to define and design how is the system's architecture going to be"
+  }
+]
