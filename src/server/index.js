@@ -10,10 +10,10 @@ const server = new Server();
 
 server.addService(notesProto.NoteService.service, {
   listAllNotes,
-  getNote,
   addNote,
   editNote,
   deleteNote,
+  getNote,
 });
 
 server.bindAsync(
