@@ -1,6 +1,7 @@
 export default (error, note) => {
   if (error) {
-    console.log("Error while editing the note!", error.message);
+    console.error("editNote", { error: error.message });
+    return;
   }
-  console.log("Successfully edited note:", note);
+  console.log("editNote", note);
 };

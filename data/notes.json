@@ -1,32 +1,17 @@
 [
   {
-    "id": "1692548612706",
-    "title": "Call Daniel",
-    "content": "I need to talk to Daniel about the gRPC protocol"
-  },
-  {
     "id": "1692548623047",
     "title": "Design gRPC software architecture",
     "content": "I have to define and design how is the system's architecture going to be"
   },
   {
-    "id": "1692551275001",
-    "title": "Listen to Jorn",
-    "content": "I have to listen to some Jorn songs to know this band"
-  },
-  {
-    "id": "1692560158424",
-    "title": "Listen to Mastodon",
-    "content": "I have to listen to some Mastodon songs to know this band"
-  },
-  {
-    "id": "1692561409055",
+    "id": "1692623097600",
     "title": "Study the JS EventLoop",
-    "content": "I have to learn about the behaviour of async functions in the JS Event Loop"
+    "content": "I have to learn about the behavior of async functions in the JS EventLoop"
   },
   {
-    "id": "1692563629915",
-    "title": "",
-    "content": "content=I have to learn about the behavior of async functions in the JS EventLoop"
+    "id": "1692623584906",
+    "title": "Listen to Jorn",
+    "content": "I have to listen to some Jorn songs in order to know the band"
   }
 ]

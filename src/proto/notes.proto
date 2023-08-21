@@ -2,8 +2,10 @@ syntax = "proto3";
 
 service NoteService {
   rpc ListAllNotes (Empty) returns (NotesList) {};
+  rpc GetNote (NoteId) returns (Note) {};
   rpc AddNote (NewNote) returns (Note) {};
-  rpc EditNote (NoteEdit) returns (Note) {};
+  rpc EditNote (Note) returns (Note) {};
+  rpc DeleteNote (NoteId) returns (Empty) {};
 }
 
 message Empty {}
@@ -19,10 +21,8 @@ message NewNote {
   string content = 2;
 }
 
-message NoteEdit {
+message NoteId {
   string id = 1;
-  optional string title = 2;
-  optional string content = 3;
 }
 
 message NotesList {

@@ -12,78 +12,74 @@ export const NOTES_DATABASE = {
 
 export function notesRepository() {
   const getAllNotes = async () => {
-    try {
-      return JSON.parse(
-        (
-          await readFile(NOTES_DATABASE.FILE_PATH, NOTES_DATABASE.OPTIONS)
-        ).toString()
-      );
-    } catch (e) {
-      throw new Error("DBError: read all error");
-    }
+    return JSON.parse(
+      (
+        await readFile(NOTES_DATABASE.FILE_PATH, NOTES_DATABASE.OPTIONS)
+      ).toString()
+    );
   };
 
   const getNoteById = async (id) => {
-    try {
-      const notes = await getAllNotes();
-      const note = notes.find((note) => note.id === id);
-      if (note === undefined) {
-        throw new Error("DBError: note not found");
-      }
-
-      return note;
-    } catch (e) {
-      throw new Error("DBError: read by id error");
+    const notes = await getAllNotes();
+    const note = notes.find((note) => note.id === id);
+    if (note === undefined) {
+      throw new Error("DBError: Note not found");
     }
+
+    return note;
   };
 
   const insertNote = async (note) => {
-    try {
-      const notes = await getAllNotes();
-      notes.push(note);
-      await writeFile(
-        NOTES_DATABASE.FILE_PATH,
-        JSON.stringify(notes, null, 2),
-        NOTES_DATABASE.OPTIONS
-      );
-      return note;
-    } catch (e) {
-      throw new Error("DBError: write error");
-    }
+    const notes = await getAllNotes();
+    notes.push(note);
+    await writeFile(
+      NOTES_DATABASE.FILE_PATH,
+      JSON.stringify(notes, null, 2),
+      NOTES_DATABASE.OPTIONS
+    );
+    return note;
   };
 
-  const updateNote = async (noteId, attributes) => {
-    const foundNote = false;
-    try {
-      const notes = await getAllNotes();
-      notes.forEach((note, index, notes) => {
-        if (note.id === noteId) {
-          foundNote = true;
-          notes[index] = {
-            id: note.id,
-            title: attributes.title ?? note.title,
-            content: attributes.content ?? note.content,
-          };
-        }
-      });
-      await writeFile(
-        NOTES_DATABASE.FILE_PATH,
-        JSON.stringify(notes, null, 2),
-        NOTES_DATABASE.OPTIONS
-      );
+  const updateNote = async (id, attributes) => {
+    const notes = await getAllNotes();
+    const noteIndex = notes.findIndex((note) => note.id === id);
 
-      if (!foundNote) {
-        throw new Error("DBError: note not found");
-      }
-    } catch (e) {
-      throw new Error("DBError: update error");
+    if (noteIndex === -1) {
+      throw new Error("DBError: Note not found");
     }
+
+    notes[noteIndex] = {
+      id: notes[noteIndex].id,
+      title: attributes.title ?? notes[noteIndex].title,
+      content: attributes.content ?? notes[noteIndex].content,
+    };
+    await writeFile(
+      NOTES_DATABASE.FILE_PATH,
+      JSON.stringify(notes, null, 2),
+      NOTES_DATABASE.OPTIONS
+    );
+    return notes[noteIndex];
   };
+
+  const deleteNote = async (id) => {
+    const notes = await getAllNotes();
+    const noteIndex = notes.findIndex((note) => note.id === id);
+    if (noteIndex === -1) {
+      throw new Error("DBError: Note not found");
+    }
+    notes.splice(noteIndex, 1);
+    await writeFile(
+      NOTES_DATABASE.FILE_PATH,
+      JSON.stringify(notes, null, 2),
+      NOTES_DATABASE.OPTIONS
+    );
+  }
 
   return {
     getAllNotes,
     getNoteById,
     insertNote,
     updateNote,
+    deleteNote,
   };
 }

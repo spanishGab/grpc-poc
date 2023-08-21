@@ -1,6 +1,8 @@
 import client from "./client.js";
 import addNote from "./services/add-note.js";
+import deleteNote from "./services/delete-note.js";
 import editNote from "./services/edit-note.js";
+import getNote from "./services/getNote.js";
 import listAllNotes from "./services/list-all-notes.js";
 
 function startNotesAPI() {
@@ -20,13 +22,31 @@ function startNotesAPI() {
       break;
 
     case "editNote":
-      client.addNote(
+      client.editNote(
         {
           id: process.argv[3],
-          title: process.argv[4].split('=')[0] === 'title' ? process.argv[4] : undefined,
-          content: process.argv[5].split('=')[0] === 'content' ? process.argv[5] : undefined,
+          title: process.argv[4],
+          content: process.argv[5],
         },
         editNote
+      );
+      break;
+
+    case "deleteNote":
+      client.deleteNote(
+        {
+          id: process.argv[3],
+        },
+        deleteNote
+      );
+      break;
+
+    case "getNote":
+      client.getNote(
+        {
+          id: process.argv[3],
+        },
+        getNote
       );
       break;
 

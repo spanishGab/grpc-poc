@@ -1,6 +1,7 @@
 export default (error, notes) => {
   if (error) {
-    console.log("Error while listing notes!", error.message);
+    console.error("listAllNotes", { error: error.message });
+    return;
   }
-  console.log(notes);
+  console.log("listAllNotes", notes);
 };

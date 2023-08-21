@@ -2,18 +2,15 @@ import { notesRepository } from "../repositories/notes.js";
 import treatErrorResponse from "./utils/treat-error-response.js";
 
 export default async (call, callback) => {
-  console.log("addNote", { requestData: call.request });
+  console.log("getNote", { requestData: call.request });
   const repository = notesRepository();
-  const newNote = {
-    id: Date.now().toString(),
-    ...call.request,
-  };
+  const { id } = call.request;
   try {
-    const note = await repository.insertNote(newNote);
-    console.log("addNote", { responseData: note });
+    const note = await repository.getNoteById(id);
+    console.log("getNote", { responseData: note });
     callback(null, note);
   } catch (e) {
-    console.error("addNote", { error: e.message });
+    console.error("getNote", { error: e.message });
     treatErrorResponse(e, callback);
   }
 };

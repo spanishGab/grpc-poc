@@ -3,13 +3,17 @@ import { notesProto } from "../proto/index.js";
 import listAllNotes from "./services/list-all-notes.js";
 import addNote from "./services/add-note.js";
 import editNote from "./services/edit-note.js";
+import deleteNote from "./services/delete-note.js";
+import getNote from "./services/get-note.js";
 
 const server = new Server();
 
 server.addService(notesProto.NoteService.service, {
   listAllNotes,
+  getNote,
   addNote,
   editNote,
+  deleteNote,
 });
 
 server.bindAsync(
